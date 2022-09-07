@@ -5,7 +5,6 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
-
 typedef struct nara_sprite {
 	SDL_Texture *img;
 	SDL_Rect rect;

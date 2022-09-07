@@ -5,7 +5,6 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 
-
 typedef struct nara_font {
 	TTF_Font *font;
 	uint32_t size;

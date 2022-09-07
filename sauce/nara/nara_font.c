@@ -6,15 +6,6 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 
-// TTF_Font *font;
-// uint32_t size;
-// SDL_Rect rect;
-// SDL_Color color;
-// 
-// SDL_Texture *_texture;
-// SDL_Surface *_surface;
-
-
 Font
 fontNew(char *path, uint32_t size, SDL_Color color)
 {
