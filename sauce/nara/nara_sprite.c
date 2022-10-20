@@ -10,7 +10,7 @@ spriteNew(char *path)
 {
 	Sprite spr;
 	spriteLoad(&spr, path);
-	spr.rect = (SDL_Rect) {0, 0, global.tileSize, global.tileSize};
+	spr.rect = (SDL_Rect) {0, 0, global.tileWidth, global.tileHeight};
 	spr.flip = SDL_FLIP_NONE;
 	spr.angle = 0;
 	return spr;
@@ -27,19 +27,21 @@ spriteLoad(Sprite *spr, char *path)
 void
 spriteAnimate(Sprite *spr, SpriteRange *range)
 {
+	// TODO: maybe add some y offset as well
+
 	// interrupt other animation, kinda stupid but it'll work
-	if (spr->rect.x > range->end * global.tileSize ||
-			spr->rect.x < range->start * global.tileSize)
-		spr->rect.x = range->end * global.tileSize;
+	if (spr->rect.x > range->end * global.tileWidth ||
+			spr->rect.x < range->start * global.tileWidth)
+		spr->rect.x = range->end * global.tileWidth;
 	// some delay between frames
 	if (spr->_animLoop > -1) ++spr->_animLoop;
 	if (spr->_animLoop > range->speed) spr->_animLoop = -1;
 
 	// move sprite's rectangle inside range to animate
 	if (spr->_animLoop == -1) {
-		if (spr->rect.x < range->end * global.tileSize)
-			spr->rect.x += global.tileSize;
-		else spr->rect.x = range->start * global.tileSize;
+		if (spr->rect.x < range->end * global.tileWidth)
+			spr->rect.x += global.tileWidth;
+		else spr->rect.x = range->start * global.tileWidth;
 		spr->_animLoop = 0;
 	}
 }

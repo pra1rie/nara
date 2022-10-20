@@ -34,7 +34,7 @@ init(void)
 	TTF_Init();
 
 	// global defaults
-	global.tileSize = 32;
+	global.tileWidth = global.tileHeight = 32;
 	global.isRunning = true;
 }
 

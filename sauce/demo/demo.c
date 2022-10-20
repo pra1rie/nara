@@ -45,7 +45,7 @@ init_player()
 {
 	player.sprite = spriteNew("data/player.png");
 	player.speed = 6;
-	player.rect = (SDL_Rect) {120, 120, global.tileSize, global.tileSize};
+	player.rect = (SDL_Rect) {120, 120, global.tileWidth, global.tileHeight};
 	player.rect_copy = player.rect;
 
 	player.range[PLAYER_IDLE] = (SpriteRange) {0, 1, 36};

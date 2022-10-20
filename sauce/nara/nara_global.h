@@ -4,7 +4,7 @@
 #include "nara/nara_window.h"
 
 typedef struct nara_global {
-	int tileSize;
+	int tileWidth, tileHeight;
 	bool isRunning;
 	Window window;
 } Global;
