@@ -9,7 +9,7 @@ events(SDL_Event e)
 		global.isRunning = false;
 		break;
 	case SDL_WINDOWEVENT: {
-		if (e.window.type == SDL_WINDOWEVENT_RESIZED) {
+		if (e.window.event == SDL_WINDOWEVENT_RESIZED) {
 			global.window.width = e.window.data1;
 			global.window.height = e.window.data2;
 		}
