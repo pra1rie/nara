@@ -18,6 +18,7 @@ events(SDL_Event e)
 	}
 }
 
+// TODO: render / update separately
 static void
 update()
 {
