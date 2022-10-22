@@ -25,6 +25,7 @@ typedef struct nara_sprite_range {
 	// int _animLoop;
 } SpriteRange;
 
+Sprite spritePlain(SDL_Color col, int w, int h);
 Sprite spriteNew(char *path);
 void spriteLoad(Sprite *spr, char *path);
 void spriteAnimate(Sprite *spr, SpriteRange *range);
