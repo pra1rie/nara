@@ -22,7 +22,7 @@ spritePlain(SDL_Color col, int w, int h)
 
 	spr.width = w;
 	spr.height = h;
-	spr._animLoop = -1;
+	spr.frame = -1;
 	spr.flip = SDL_FLIP_NONE;
 	spr.angle = 0;
 	return spr;
@@ -44,28 +44,28 @@ spriteLoad(Sprite *spr, char *path)
 {
 	spr->img = loadImage(path);
 	SDL_QueryTexture(spr->img, NULL, NULL, &spr->width, &spr->height);
-	spr->_animLoop = -1;
+	spr->frame = -1;
 }
 
 void
 spriteAnimate(Sprite *spr, SpriteRange *range)
 {
-	// TODO: maybe add some y offset as well
-
 	// interrupt other animation, kinda stupid but it'll work
 	if (spr->rect.x > range->end * global.tileWidth ||
 			spr->rect.x < range->start * global.tileWidth)
 		spr->rect.x = range->end * global.tileWidth;
 	// some delay between frames
-	if (spr->_animLoop > -1) ++spr->_animLoop;
-	if (spr->_animLoop > range->speed) spr->_animLoop = -1;
+	if (spr->frame > -1) ++spr->frame;
+	if (spr->frame > range->speed) spr->frame = -1;
 
 	// move sprite's rectangle inside range to animate
-	if (spr->_animLoop == -1) {
+	if (spr->frame == -1) {
 		if (spr->rect.x < range->end * global.tileWidth)
 			spr->rect.x += global.tileWidth;
-		else spr->rect.x = range->start * global.tileWidth;
-		spr->_animLoop = 0;
+		else
+			spr->rect.x = range->start * global.tileWidth;
+		spr->rect.y = range->offset * global.tileWidth;
+		spr->frame = 0;
 	}
 }
 

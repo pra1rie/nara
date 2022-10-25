@@ -48,8 +48,8 @@ init_player()
 	player.rect = (SDL_Rect) {120, 120, global.tileWidth, global.tileHeight};
 	player.rect_copy = player.rect;
 
-	player.range[PLAYER_IDLE] = (SpriteRange) {0, 1, 36};
-	player.range[PLAYER_WALK] = (SpriteRange) {2, 6, 6};
+	player.range[PLAYER_IDLE] = (SpriteRange) {0, 1, 36, 0};
+	player.range[PLAYER_WALK] = (SpriteRange) {2, 6, 6, 0};
 
 	player.state = PLAYER_IDLE;
 }

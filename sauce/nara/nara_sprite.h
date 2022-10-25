@@ -13,16 +13,15 @@ typedef struct nara_sprite {
 	int width;
 	int height;
 
-	// having this here kinda makes my life easier
-	int _animLoop;
+	// having this here makes my life easier
+	int frame;
 } Sprite;
 
 typedef struct nara_sprite_range {
 	int start;
 	int end;
 	int speed;
-
-	// int _animLoop;
+	int offset;
 } SpriteRange;
 
 Sprite spritePlain(SDL_Color col, int w, int h);
