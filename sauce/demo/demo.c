@@ -7,19 +7,17 @@
 #define rn global.window.render
 #define ZOOM 3
 
-typedef enum {
-	PLAYER_IDLE,
-	PLAYER_WALK,
-	NUM_PLAYER_STATES,
-} PlayerAnimState;
-
 static struct {
 	Sprite sprite;
 	SDL_Rect rect;
 	SDL_Rect rect_copy;
 	int speed;
 	
-	PlayerAnimState state;
+	enum {
+		PLAYER_IDLE,
+		PLAYER_WALK,
+		NUM_PLAYER_STATES,
+	} state;
 	SpriteRange range[NUM_PLAYER_STATES];
 } player;
 
