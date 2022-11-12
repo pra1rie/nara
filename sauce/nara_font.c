@@ -1,5 +1,5 @@
-#include "nara/nara_font.h"
-#include "nara/nara_global.h"
+#include "nara_font.h"
+#include "nara_global.h"
 
 #include <string.h>
 

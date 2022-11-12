@@ -1,11 +1,10 @@
-#include "nara/nara_util.h"
-#include "nara/nara_global.h"
+#include "nara_util.h"
+#include "nara_global.h"
 
 #include <stdint.h>
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
-// #include <SDL2/SDL_mixer.h>
 #include <SDL2/SDL_ttf.h>
 
 SDL_Texture*

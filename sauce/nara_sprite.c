@@ -1,6 +1,6 @@
-#include "nara/nara_sprite.h"
-#include "nara/nara_util.h"
-#include "nara/nara_global.h"
+#include "nara_sprite.h"
+#include "nara_util.h"
+#include "nara_global.h"
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>

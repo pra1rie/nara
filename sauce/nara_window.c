@@ -1,6 +1,6 @@
-#include "nara/nara_window.h"
-#include "nara/nara_util.h"
-#include "nara/nara_global.h"
+#include "nara_window.h"
+#include "nara_util.h"
+#include "nara_global.h"
 
 Window
 windowNew(char *t, uint32_t w, uint32_t h, bool r)

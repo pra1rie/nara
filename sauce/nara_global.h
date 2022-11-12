@@ -1,7 +1,7 @@
 #pragma once
 
-#include "nara/nara_util.h"
-#include "nara/nara_window.h"
+#include "nara_util.h"
+#include "nara_window.h"
 
 typedef struct nara_global {
 	int tileWidth, tileHeight;
