@@ -10,6 +10,6 @@ typedef enum nara_bool {
 SDL_Texture *loadImage(char *path);
 int getKey(SDL_Scancode key);
 
-void init(void);
-void quit(void);
+void initNara(void);
+void exitNara(void);
 
