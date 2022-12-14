@@ -20,8 +20,14 @@ fontNew(char *path, uint32_t size, SDL_Color color)
 void
 fontFree(Font *font)
 {
-	SDL_DestroyTexture(font->_texture);
-	SDL_FreeSurface(font->_surface);
+	if (font->_texture != NULL) {
+		SDL_DestroyTexture(font->_texture);
+		font->_texture = NULL;
+	}
+	if (font->_surface != NULL) {
+		SDL_FreeSurface(font->_surface);
+		font->_surface = NULL;
+	}
 }
 
 void
