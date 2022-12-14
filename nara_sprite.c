@@ -64,7 +64,7 @@ spriteAnimate(Sprite *spr, SpriteRange *range)
 			spr->rect.x += global.tileWidth;
 		else
 			spr->rect.x = range->start * global.tileWidth;
-		spr->rect.y = range->offset * global.tileWidth;
+		spr->rect.y = range->offset * global.tileHeight;
 		spr->frame = 0;
 	}
 }
