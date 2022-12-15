@@ -12,6 +12,9 @@ typedef struct nara_sprite {
 	int angle;
 	int width;
 	int height;
+	// individual subsprites
+	int tileWidth;
+	int tileHeight;
 
 	// having this here makes my life easier
 	int frame;
@@ -25,7 +28,7 @@ typedef struct nara_sprite_range {
 } SpriteRange;
 
 Sprite spritePlain(SDL_Color col, int w, int h);
-Sprite spriteNew(char *path);
+Sprite spriteNew(char *path, int w, int h);
 void spriteLoad(Sprite *spr, char *path);
 void spriteAnimate(Sprite *spr, SpriteRange *range);
 void spriteRender(Sprite *spr, SDL_Rect *dest);

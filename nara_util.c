@@ -33,7 +33,6 @@ initNara(void)
 	TTF_Init();
 
 	// global defaults
-	global.tileWidth = global.tileHeight = 32;
 	global.isRunning = true;
 }
 

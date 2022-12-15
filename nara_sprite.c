@@ -20,8 +20,8 @@ spritePlain(SDL_Color col, int w, int h)
 	SDL_RenderClear(global.window.render);
 	SDL_SetRenderTarget(global.window.render, NULL);
 
-	spr.width = w;
-	spr.height = h;
+	spr.width = spr.tileWidth = w;
+	spr.height = spr.tileHeight = h;
 	spr.frame = -1;
 	spr.flip = SDL_FLIP_NONE;
 	spr.angle = 0;
@@ -29,11 +29,13 @@ spritePlain(SDL_Color col, int w, int h)
 }
 
 Sprite
-spriteNew(char *path)
+spriteNew(char *path, int w, int h)
 {
 	Sprite spr;
 	spriteLoad(&spr, path);
-	spr.rect = (SDL_Rect) {0, 0, global.tileWidth, global.tileHeight};
+	spr.rect = (SDL_Rect) {0, 0, w, h};
+	spr.tileWidth = w;
+	spr.tileHeight = h;
 	spr.flip = SDL_FLIP_NONE;
 	spr.angle = 0;
 	return spr;
@@ -51,20 +53,20 @@ void
 spriteAnimate(Sprite *spr, SpriteRange *range)
 {
 	// interrupt other animation, kinda stupid but it'll work
-	if (spr->rect.x > range->end * global.tileWidth ||
-			spr->rect.x < range->start * global.tileWidth)
-		spr->rect.x = range->end * global.tileWidth;
+	if (spr->rect.x > range->end * spr->tileWidth ||
+			spr->rect.x < range->start * spr->tileWidth)
+		spr->rect.x = range->end * spr->tileWidth;
 	// some delay between frames
 	if (spr->frame > -1) ++spr->frame;
 	if (spr->frame > range->speed) spr->frame = -1;
 
 	// move sprite's rectangle inside range to animate
 	if (spr->frame == -1) {
-		if (spr->rect.x < range->end * global.tileWidth)
-			spr->rect.x += global.tileWidth;
+		if (spr->rect.x < range->end * spr->tileWidth)
+			spr->rect.x += spr->tileWidth;
 		else
-			spr->rect.x = range->start * global.tileWidth;
-		spr->rect.y = range->offset * global.tileHeight;
+			spr->rect.x = range->start * spr->tileWidth;
+		spr->rect.y = range->offset * spr->tileHeight;
 		spr->frame = 0;
 	}
 }
