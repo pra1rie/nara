@@ -16,7 +16,7 @@ windowNew(char *t, uint32_t w, uint32_t h, bool r)
 			SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
 			w, h, (r? SDL_WINDOW_RESIZABLE : 0) | SDL_WINDOW_INPUT_FOCUS);
 
-	wn->render = SDL_CreateRenderer(wn.window, -1, SDL_RENDERER_ACCELERATED);
+	wn->render = SDL_CreateRenderer(wn->window, -1, SDL_RENDERER_ACCELERATED);
 	return wn;
 }
 
