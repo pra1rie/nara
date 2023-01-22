@@ -11,7 +11,7 @@ SDL_Texture*
 loadImage(char *path)
 {
 	SDL_Surface *s = IMG_Load(path);
-	SDL_Texture *t = SDL_CreateTextureFromSurface(global.window.render, s);
+	SDL_Texture *t = SDL_CreateTextureFromSurface(global.window->render, s);
 	SDL_FreeSurface(s);
 	return t;
 }

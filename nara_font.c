@@ -74,7 +74,7 @@ fontWriteRight(Font *font, char *text, int x, int y)
 static void
 fontRenderTexture(Font *font)
 {
-	SDL_RenderCopy(global.window.render, font->_texture, NULL, &font->rect);
+	SDL_RenderCopy(global.window->render, font->_texture, NULL, &font->rect);
 	fontFree(font);
 }
 
@@ -82,11 +82,11 @@ static void
 fontRenderSurface(Font *font, char *text)
 {
 	SDL_Color color;
-	SDL_GetRenderDrawColor(global.window.render,
+	SDL_GetRenderDrawColor(global.window->render,
 			&color.r, &color.g, &color.b, &color.a);
 
 	font->_surface = TTF_RenderText_Shaded(font->font, text, font->color, color);
 	font->_texture = SDL_CreateTextureFromSurface(
-				global.window.render, font->_surface);
+				global.window->render, font->_surface);
 }
 

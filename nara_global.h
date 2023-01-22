@@ -5,7 +5,7 @@
 
 typedef struct nara_global {
 	bool isRunning;
-	Window window;
+	Window *window;
 } Global;
 
 extern Global global;
