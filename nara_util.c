@@ -24,6 +24,24 @@ getKey(SDL_Scancode key)
 }
 
 void
+genericEvents(SDL_Event event)
+{
+	switch (event.type) {
+	case SDL_QUIT:
+		global.isRunning = false;
+		break;
+	case SDL_WINDOWEVENT: {
+		if (event.window.event == SDL_WINDOWEVENT_RESIZED) {
+			global.window->width  = event.window.data1;
+			global.window->height = event.window.data2;
+		}
+		break;
+	}
+	default: break;
+	}
+}
+
+void
 initNara(void)
 {
 	SDL_Init(SDL_INIT_EVERYTHING);
