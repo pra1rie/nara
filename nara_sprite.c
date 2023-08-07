@@ -11,15 +11,15 @@ spritePlain(SDL_Color col, int w, int h)
 	Sprite spr;
 	spr.rect = (SDL_Rect) {0, 0, w, h};
 
-	spr.img = SDL_CreateTexture(global.window->render,
+	spr.img = SDL_CreateTexture(global.render,
 			SDL_PIXELFORMAT_RGBA32, SDL_TEXTUREACCESS_TARGET, w, h);
 
-	SDL_SetRenderTarget(global.window->render, spr.img);
-	SDL_SetRenderDrawColor(global.window->render,
+	SDL_SetRenderTarget(global.render, spr.img);
+	SDL_SetRenderDrawColor(global.render,
 			col.r, col.g, col.b, col.a);
 
-	SDL_RenderClear(global.window->render);
-	SDL_SetRenderTarget(global.window->render, NULL);
+	SDL_RenderClear(global.render);
+	SDL_SetRenderTarget(global.render, NULL);
 
 	spr.width = spr.tileWidth = w;
 	spr.height = spr.tileHeight = h;
@@ -75,7 +75,7 @@ spriteAnimate(Sprite *spr, SpriteRange *range)
 void
 spriteRender(Sprite *spr, SDL_Rect *dest)
 {
-	SDL_RenderCopyEx(global.window->render,
+	SDL_RenderCopyEx(global.render,
 			spr->img, &spr->rect, dest, spr->angle, NULL, spr->flip);
 }
 

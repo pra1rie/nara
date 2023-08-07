@@ -11,7 +11,7 @@ SDL_Texture*
 loadImage(char *path)
 {
 	SDL_Surface *s = IMG_Load(path);
-	SDL_Texture *t = SDL_CreateTextureFromSurface(global.window->render, s);
+	SDL_Texture *t = SDL_CreateTextureFromSurface(global.render, s);
 	SDL_FreeSurface(s);
 	return t;
 }
@@ -32,8 +32,8 @@ genericEvents(SDL_Event event)
 		break;
 	case SDL_WINDOWEVENT: {
 		if (event.window.event == SDL_WINDOWEVENT_RESIZED) {
-			global.window->width  = event.window.data1;
-			global.window->height = event.window.data2;
+			global.width  = event.window.data1;
+			global.height = event.window.data2;
 		}
 		break;
 	}
@@ -42,7 +42,7 @@ genericEvents(SDL_Event event)
 }
 
 void
-initNara(void)
+initNara(char *t, uint32_t w, uint32_t h, bool r)
 {
 	SDL_Init(SDL_INIT_EVERYTHING);
 	IMG_Init(IMG_INIT_PNG|IMG_INIT_PNG|IMG_INIT_TIF|IMG_INIT_WEBP);
@@ -52,11 +52,23 @@ initNara(void)
 
 	// global defaults
 	global.isRunning = true;
+	global.width = w;
+	global.height = h;
+	global.resizable = r;
+	
+	global.window = SDL_CreateWindow(t,
+			SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+			w, h, (r? SDL_WINDOW_RESIZABLE : 0) | SDL_WINDOW_INPUT_FOCUS);
+
+	global.render = SDL_CreateRenderer(global.window, -1, SDL_RENDERER_ACCELERATED);
 }
 
 void
 exitNara(void)
 {
+	SDL_DestroyRenderer(global.render);
+	SDL_DestroyWindow(global.window);
+
 	TTF_Quit();
 	// Mix_Quit();
 	IMG_Quit();
