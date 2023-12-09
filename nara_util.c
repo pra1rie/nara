@@ -16,13 +16,6 @@ loadImage(char *path)
 	return t;
 }
 
-int
-getKey(SDL_Scancode key)
-{
-	const uint8_t* state = SDL_GetKeyboardState(NULL);
-	return state[key];
-}
-
 void
 genericEvents(SDL_Event event)
 {

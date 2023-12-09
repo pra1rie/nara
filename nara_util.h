@@ -8,7 +8,6 @@ typedef enum nara_bool {
 } bool;
 
 SDL_Texture *loadImage(char *path);
-int getKey(SDL_Scancode key);
 
 // handles SDL_QUIT and SDL_WINDOWRESIZED
 void genericEvents(SDL_Event event);
