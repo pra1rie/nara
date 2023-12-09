@@ -29,7 +29,7 @@ typedef struct nara_sprite_range {
 
 Sprite spritePlain(SDL_Color col, int w, int h);
 Sprite spriteNew(char *path, int w, int h);
+void spriteFree(Sprite *spr);
 void spriteLoad(Sprite *spr, char *path);
 void spriteAnimate(Sprite *spr, SpriteRange *range);
 void spriteRender(Sprite *spr, SDL_Rect *dest);
-

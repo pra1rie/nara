@@ -43,6 +43,12 @@ spriteNew(char *path, int w, int h)
 }
 
 void
+spriteFree(Sprite *spr)
+{
+	SDL_DestroyTexture(spr->img);
+}
+
+void
 spriteLoad(Sprite *spr, char *path)
 {
 	spr->img = loadImage(path);
