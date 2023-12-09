@@ -1,6 +1,5 @@
 # nara
 
-i got tired of writing the same code over and over again
-so now i'm writing the same code over and over again  
-... with nara.
+a little library something containing the most common things i use on my simple 2D projects
+so i don't have to rewrite them from scratch every time uwu
 
