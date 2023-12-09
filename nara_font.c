@@ -28,6 +28,7 @@ fontFree(Font *font)
 		SDL_FreeSurface(font->_surface);
 		font->_surface = NULL;
 	}
+	TTF_CloseFont(font->font);
 }
 
 void
@@ -75,7 +76,10 @@ static void
 fontRenderTexture(Font *font)
 {
 	SDL_RenderCopy(global.render, font->_texture, NULL, &font->rect);
-	fontFree(font);
+	SDL_DestroyTexture(font->_texture);
+	SDL_FreeSurface(font->_surface);
+	font->_texture = NULL;
+	font->_surface = NULL;
 }
 
 static void
