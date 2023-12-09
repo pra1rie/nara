@@ -5,4 +5,3 @@
 #include "nara_font.h"
 #include "nara_util.h"
 
-
