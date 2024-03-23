@@ -2,10 +2,9 @@
 
 #include <SDL2/SDL.h>
 
-typedef enum nara_bool {
-	false = 0,
-	true = 1
-} bool;
+#define bool char
+#define true 1
+#define false 0
 
 SDL_Surface *loadImage(char *path);
 SDL_Texture *loadImageAsTexture(SDL_Renderer *rn, char *path);
