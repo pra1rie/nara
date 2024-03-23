@@ -1,5 +1,5 @@
 #include "nara_font.h"
-#include "nara_global.h"
+#include "nara_window.h"
 
 #include <string.h>
 
@@ -12,7 +12,6 @@ fontNew(char *path, uint32_t size, SDL_Color color)
 	Font font;
 	font.font = TTF_OpenFont(path, size);
 	font.size = size;
-	font.rect = (SDL_Rect) {0, 0, size, size};
 	font.color = color;
 	return font;
 }
@@ -20,77 +19,42 @@ fontNew(char *path, uint32_t size, SDL_Color color)
 void
 fontFree(Font *font)
 {
-	if (font->_texture != NULL) {
-		SDL_DestroyTexture(font->_texture);
-		font->_texture = NULL;
-	}
-	if (font->_surface != NULL) {
-		SDL_FreeSurface(font->_surface);
-		font->_surface = NULL;
-	}
 	TTF_CloseFont(font->font);
 }
 
 void
-fontWrite(Font *font, char *text, int x, int y)
+fontWrite(Font *font, SDL_Renderer *dest, char *text, int x, int y)
 {
 	if (strlen(text) == 0) return;
-	fontRenderSurface(font, text);
-
-	font->rect = (SDL_Rect) {x, y, font->_surface->w, font->_surface->h};
-
-	fontRenderTexture(font);
+	SDL_Surface *srf = TTF_RenderUTF8_Blended(font->font, text, font->color);
+	SDL_Texture *tex = SDL_CreateTextureFromSurface(dest, srf);
+	SDL_Rect rect = {x, y, srf->w, srf->h};
+	SDL_RenderCopy(dest, tex, NULL, &rect);
+	SDL_DestroyTexture(tex);
+	SDL_FreeSurface(srf);
 }
 
 void
-fontWriteCenter(Font *font, char *text, int x, int y)
+fontWriteCenter(Font *font, SDL_Renderer *dest, char *text, int x, int y)
 {
 	if (strlen(text) == 0) return;
-	fontRenderSurface(font, text);
-
-	font->rect = (SDL_Rect) {
-		x - (font->_surface->w/2),
-		y - (font->_surface->h/2),
-		font->_surface->w,
-		font->_surface->h
-	};
-
-	fontRenderTexture(font);
+	SDL_Surface *srf = TTF_RenderUTF8_Blended(font->font, text, font->color);
+	SDL_Texture *tex = SDL_CreateTextureFromSurface(dest, srf);
+	SDL_Rect rect = {x - (srf->w/2), y - (srf->h/2), srf->w, srf->h};
+	SDL_RenderCopy(dest, tex, NULL, &rect);
+	SDL_DestroyTexture(tex);
+	SDL_FreeSurface(srf);
 }
 
 void
-fontWriteRight(Font *font, char *text, int x, int y)
+fontWriteRight(Font *font, SDL_Renderer *dest, char *text, int x, int y)
 {
 	if (strlen(text) == 0) return;
-	fontRenderSurface(font, text);
-
-	font->rect = (SDL_Rect) {
-		x - (font->_surface->w), y,
-		font->_surface->w, font->_surface->h
-	};
-
-	fontRenderTexture(font);
-}
-
-static void
-fontRenderTexture(Font *font)
-{
-	SDL_RenderCopy(global.render, font->_texture, NULL, &font->rect);
-	SDL_DestroyTexture(font->_texture);
-	SDL_FreeSurface(font->_surface);
-	font->_texture = NULL;
-	font->_surface = NULL;
-}
-
-static void
-fontRenderSurface(Font *font, char *text)
-{
-	SDL_Color color;
-	SDL_GetRenderDrawColor(global.render,
-			&color.r, &color.g, &color.b, &color.a);
-
-	font->_surface = TTF_RenderText_Shaded(font->font, text, font->color, color);
-	font->_texture = SDL_CreateTextureFromSurface(
-				global.render, font->_surface);
+	SDL_Surface *srf = TTF_RenderUTF8_Blended(font->font, text, font->color);
+	SDL_Texture *tex = SDL_CreateTextureFromSurface(dest, srf);
+	SDL_Rect rect = {x - srf->w, y, srf->w, srf->h};
+	SDL_RenderCopy(dest, tex, NULL, &rect);
+	SDL_DestroyTexture(tex);
+	SDL_FreeSurface(srf);
 }
 

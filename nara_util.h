@@ -7,11 +7,9 @@ typedef enum nara_bool {
 	true = 1
 } bool;
 
-SDL_Texture *loadImage(char *path);
+SDL_Surface *loadImage(char *path);
+SDL_Texture *loadImageAsTexture(SDL_Renderer *rn, char *path);
 
-// handles SDL_QUIT and SDL_WINDOWRESIZED
-void genericEvents(SDL_Event event);
-
-void initNara(char *t, uint32_t w, uint32_t h, bool r);
+void initNara(void);
 void exitNara(void);
 

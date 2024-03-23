@@ -1,5 +1,5 @@
 #include "nara_util.h"
-#include "nara_global.h"
+#include "nara_window.h"
 
 #include <stdint.h>
 
@@ -7,61 +7,34 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
 
-SDL_Texture*
+SDL_Surface*
 loadImage(char *path)
 {
+	return IMG_Load(path);
+}
+
+SDL_Texture*
+loadImageAsTexture(SDL_Renderer *rn, char *path)
+{
 	SDL_Surface *s = IMG_Load(path);
-	SDL_Texture *t = SDL_CreateTextureFromSurface(global.render, s);
+	SDL_Texture *t = SDL_CreateTextureFromSurface(rn, s);
 	SDL_FreeSurface(s);
 	return t;
 }
 
 void
-genericEvents(SDL_Event event)
-{
-	switch (event.type) {
-	case SDL_QUIT:
-		global.isRunning = false;
-		break;
-	case SDL_WINDOWEVENT: {
-		if (event.window.event == SDL_WINDOWEVENT_RESIZED) {
-			global.width  = event.window.data1;
-			global.height = event.window.data2;
-		}
-		break;
-	}
-	default: break;
-	}
-}
-
-void
-initNara(char *t, uint32_t w, uint32_t h, bool r)
+initNara(void)
 {
 	SDL_Init(SDL_INIT_EVERYTHING);
 	IMG_Init(IMG_INIT_PNG|IMG_INIT_PNG|IMG_INIT_TIF|IMG_INIT_WEBP);
 	// Mix_Init(MIX_INIT_FLAC|MIX_INIT_MOD|
 	// 			MIX_INIT_MP3|MIX_INIT_OGG);
 	TTF_Init();
-
-	// global defaults
-	global.isRunning = true;
-	global.width = w;
-	global.height = h;
-	global.resizable = r;
-	
-	global.window = SDL_CreateWindow(t,
-			SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-			w, h, (r? SDL_WINDOW_RESIZABLE : 0) | SDL_WINDOW_INPUT_FOCUS);
-
-	global.render = SDL_CreateRenderer(global.window, -1, SDL_RENDERER_ACCELERATED);
 }
 
 void
 exitNara(void)
 {
-	SDL_DestroyRenderer(global.render);
-	SDL_DestroyWindow(global.window);
-
 	TTF_Quit();
 	// Mix_Quit();
 	IMG_Quit();

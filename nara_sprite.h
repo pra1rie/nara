@@ -6,7 +6,8 @@
 #include <SDL2/SDL_image.h>
 
 typedef struct nara_sprite {
-	SDL_Texture *img;
+	/* SDL_Texture *img; */
+	SDL_Surface *img;
 	SDL_Rect rect;
 	SDL_RendererFlip flip;
 	int angle;
@@ -27,9 +28,9 @@ typedef struct nara_sprite_range {
 	int offset;
 } SpriteRange;
 
-Sprite spritePlain(SDL_Color col, int w, int h);
+Sprite spritePlain(int col, int w, int h);
 Sprite spriteNew(char *path, int w, int h);
 void spriteFree(Sprite *spr);
 void spriteLoad(Sprite *spr, char *path);
 void spriteAnimate(Sprite *spr, SpriteRange *range);
-void spriteRender(Sprite *spr, SDL_Rect *dest);
+void spriteRender(Sprite *spr, SDL_Renderer *dst, SDL_Rect *dstrect);
