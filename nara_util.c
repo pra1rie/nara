@@ -1,26 +1,10 @@
 #include "nara_util.h"
-#include "nara_window.h"
 
 #include <stdint.h>
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
-
-SDL_Surface*
-loadImage(char *path)
-{
-	return IMG_Load(path);
-}
-
-SDL_Texture*
-loadImageAsTexture(SDL_Renderer *rn, char *path)
-{
-	SDL_Surface *s = IMG_Load(path);
-	SDL_Texture *t = SDL_CreateTextureFromSurface(rn, s);
-	SDL_FreeSurface(s);
-	return t;
-}
 
 void
 initNara(void)

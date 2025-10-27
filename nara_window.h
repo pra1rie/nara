@@ -1,6 +1,6 @@
 #pragma once
 
-#include "nara_util.h"
+#include <stdbool.h>
 #include <SDL2/SDL.h>
 
 typedef struct nara_window {
@@ -11,13 +11,8 @@ typedef struct nara_window {
 	SDL_Renderer *render;
 } Window;
 
-// Why the fuck did i use this shitty ass naming convention
-// fucking hell
-
-// handles SDL_QUIT and SDL_WINDOWRESIZED
-// returns 'false' on SDL_QUIT, because i just felt like it
-bool windowEvents(Window *wn, SDL_Event event);
 
 Window windowNew(char *t, uint32_t w, uint32_t h, bool r);
 void windowFree(Window *wn);
 
+bool windowEvents(Window *wn, SDL_Event event);

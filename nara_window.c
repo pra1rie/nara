@@ -1,5 +1,8 @@
-#include "nara_util.h"
 #include "nara_window.h"
+
+#include <stdbool.h>
+
+#include <SDL2/SDL.h>
 
 Window
 windowNew(char *t, uint32_t w, uint32_t h, bool r)
